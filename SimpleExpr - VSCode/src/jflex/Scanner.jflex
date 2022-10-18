@@ -25,6 +25,8 @@ import java_cup.runtime.*;
     }
 %}
 
+//  ONDE COLOCA SIN E COS E PI?????????????????????????
+
 ws = [\ \t\f\r\n]
 number = \d+(\.\d+)?(["E""e"]["+""-"]?\d+)?
 id = [A-Za-z][A-Za-z0-9]*
@@ -33,11 +35,13 @@ id = [A-Za-z][A-Za-z0-9]*
 "+"         { return symbol(sym.PLUS); }
 "-"         { return symbol(sym.MINUS); }
 "*"         { return symbol(sym.TIMES); }
+"**"        { return symbol(sym.EXPO); }
 "/"         { return symbol(sym.DIVIDE); }
 "%"         { return symbol(sym.MOD); }
 "("         { return symbol(sym.LPAREN); }
 ")"         { return symbol(sym.RPAREN); }
 "="         { return symbol(sym.ASSIGN); }
+"PI"        { return symbol(sym.PI); }
 {id}        { return symbol(sym.ID, yytext()); }
 {number}    { return symbol(sym.NUMBER, Double.valueOf(yytext())); }
 {ws}        {/* Ignore */}

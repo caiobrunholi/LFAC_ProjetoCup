@@ -2,24 +2,26 @@
 package parser;
 import java_cup.runtime.*;
 import java.util.HashMap;
+import java.lang.Math;
 
 parser code{:
         private HashMap<String, Double> symbolTable = new HashMap<>();
 :}
 
-
+//  ONDE COLOCA SIN E COS E PI?????????????????????????
 // Definição dos terminais
-terminal            SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD;
-terminal            UMINUS, LPAREN, RPAREN, ASSIGN;
-terminal Double    NUMBER;
-terminal String    ID;
+terminal            SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD, SIN, COS, EXPO;
+terminal            UMINUS, LPAREN, RPAREN, ASSIGN, PI;
+terminal Double     NUMBER;
+terminal String     ID;
 // Definição dos não-terminais
 non terminal            expr_list, expr_part;
-non terminal Double    expr;
+non terminal Double     expr;
 // Precedência e associatividade dos operadores
 precedence right ASSIGN;
 precedence left PLUS, MINUS;
 precedence left TIMES, DIVIDE, MOD;
+precedence left EXPO;
 precedence left UMINUS;
 
 // Regras da gramática
@@ -40,10 +42,15 @@ expr ::= expr:e1 PLUS expr:e2
             {: RESULT = e1 / e2; :}
     | expr:e1 MOD expr:e2
             {: RESULT = e1 % e2; :}
+    | expr:e1 EXPO expr:e2
+            {: RESULT = Math.pow(e1, e2); :}
     | NUMBER:n {: RESULT = n; :}
     | MINUS expr:e {: RESULT = -e;
                     :} %prec UMINUS
     | LPAREN expr:e RPAREN {: RESULT = e; :}
+    | SIN LPAREN expr:e RPAREN {: RESULT = Math.sin(e); :}
+    | COS LPAREN expr:e RPAREN {: RESULT = Math.cos(e); :}
+    | PI expr:e {: RESULT = Math.PI; :}
     | ID:id ASSIGN expr:e {:
                 symbolTable.put(id, e);
                 RESULT = e;
