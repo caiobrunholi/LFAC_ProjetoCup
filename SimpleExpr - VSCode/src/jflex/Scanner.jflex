@@ -31,6 +31,9 @@ ws = [\ \t\f\r\n]
 number = \d+(\.\d+)?(["E""e"]["+""-"]?\d+)?
 id = [A-Za-z][A-Za-z0-9]*
 %%
+"PI"        { return symbol(sym.PI, new Double(Math.PI)); }
+"sin"       { return symbol(sym.SIN); }
+"cos"       { return symbol(sym.COS); }
 ";"         { return symbol(sym.SEMI); }
 "+"         { return symbol(sym.PLUS); }
 "-"         { return symbol(sym.MINUS); }
@@ -41,7 +44,6 @@ id = [A-Za-z][A-Za-z0-9]*
 "("         { return symbol(sym.LPAREN); }
 ")"         { return symbol(sym.RPAREN); }
 "="         { return symbol(sym.ASSIGN); }
-"PI"        { return symbol(sym.PI); }
 {id}        { return symbol(sym.ID, yytext()); }
 {number}    { return symbol(sym.NUMBER, Double.valueOf(yytext())); }
 {ws}        {/* Ignore */}

@@ -8,11 +8,11 @@ parser code{:
         private HashMap<String, Double> symbolTable = new HashMap<>();
 :}
 
-//  ONDE COLOCA SIN E COS E PI?????????????????????????
 // Definição dos terminais
-terminal            SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD, SIN, COS, EXPO;
-terminal            UMINUS, LPAREN, RPAREN, ASSIGN, PI;
+terminal            SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD;
+terminal            UMINUS, LPAREN, RPAREN, ASSIGN, SIN, COS, EXPO;
 terminal Double     NUMBER;
+terminal Double     PI;
 terminal String     ID;
 // Definição dos não-terminais
 non terminal            expr_list, expr_part;
@@ -45,12 +45,12 @@ expr ::= expr:e1 PLUS expr:e2
     | expr:e1 EXPO expr:e2
             {: RESULT = Math.pow(e1, e2); :}
     | NUMBER:n {: RESULT = n; :}
+    | PI:n     {: RESULT = n; :}
     | MINUS expr:e {: RESULT = -e;
                     :} %prec UMINUS
     | LPAREN expr:e RPAREN {: RESULT = e; :}
     | SIN LPAREN expr:e RPAREN {: RESULT = Math.sin(e); :}
     | COS LPAREN expr:e RPAREN {: RESULT = Math.cos(e); :}
-    | PI expr:e {: RESULT = Math.PI; :}
     | ID:id ASSIGN expr:e {:
                 symbolTable.put(id, e);
                 RESULT = e;

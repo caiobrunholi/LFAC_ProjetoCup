@@ -10,22 +10,22 @@ public interface sym {
   /* terminals */
   public static final int TIMES = 5;
   public static final int MOD = 7;
-  public static final int SIN = 8;
+  public static final int SIN = 12;
   public static final int PLUS = 3;
-  public static final int RPAREN = 13;
-  public static final int COS = 9;
+  public static final int RPAREN = 10;
+  public static final int COS = 13;
   public static final int SEMI = 2;
-  public static final int LPAREN = 12;
+  public static final int LPAREN = 9;
   public static final int ID = 17;
-  public static final int EXPO = 10;
+  public static final int EXPO = 14;
   public static final int EOF = 0;
-  public static final int NUMBER = 16;
+  public static final int NUMBER = 15;
   public static final int DIVIDE = 6;
-  public static final int PI = 15;
+  public static final int PI = 16;
   public static final int MINUS = 4;
   public static final int error = 1;
-  public static final int ASSIGN = 14;
-  public static final int UMINUS = 11;
+  public static final int ASSIGN = 11;
+  public static final int UMINUS = 8;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -35,15 +35,15 @@ public interface sym {
   "TIMES",
   "DIVIDE",
   "MOD",
-  "SIN",
-  "COS",
-  "EXPO",
   "UMINUS",
   "LPAREN",
   "RPAREN",
   "ASSIGN",
-  "PI",
+  "SIN",
+  "COS",
+  "EXPO",
   "NUMBER",
+  "PI",
   "ID"
   };
 }
